@@ -1,0 +1,105 @@
+from time import time, sleep
+from datetime import datetime, timedelta
+
+import logging
+
+from KrakenAPI import KrakenAPI
+from SQLiteAPI import Orders
+from Utils import loadConfig
+
+# update the local database to contain the order
+def close_order(api, closed_orders, txid):
+    with Orders() as orders:
+        curr = closed_orders[txid]['descr']['pair'][:3] # which crypto?
+        vol = closed_orders[txid]['vol_exec']           # volume bought
+        cost = closed_orders[txid]['cost']              # cost in EUR
+        orders.insertOrder(txid, curr, vol, cost)       # update database
+
+        price = float(closed_orders[txid]['price'])     # average price
+        logging.info("{0}: Bought {1} {2} @ market ({3:.2f})".format(txid, vol, curr, price))
+
+# place a market order based on today's config
+# if the order isn't closed after 10 seconds,
+# cancel it and place a new one
+def buy(api, config):
+    logging.info("Attempting to buy...")
+    while True:
+        (txid, _) = api.openMarketBuyOrder(config['pair'], config['amount'])
+        if txid != 0:
+            # give the order 10 seconds to close
+            sleep(10)
+            closed_orders = api.getClosedOrders()['result']['closed']
+            if txid in closed_orders:
+                close_order(txid, closed_orders, txid)
+                return True
+            else:
+                # cancel order
+                api.cancelOrder(txid)
+                openOrders = api.getOpenOrders['result']['open']
+                # wait until order is not open anymore
+                while txid in openOrders:
+                    sleep(5)
+                    openOrders = api.getOpenOrders['result']['open']
+                closed_orders = api.getClosedOrders()['result']['closed']
+                if txid in closed_orders: # save information if it closed after all
+                    close_order(txid, closed_orders, txid)
+                    return True
+        else:
+            # not enough money, terminate
+            return False
+
+# get the timestamp of latest order
+def getLastBuyDatetime():
+    with Orders() as orders:
+        latest = orders.getLatestOrder()
+        if latest:
+            return latest[1]
+        else:
+            return datetime.now() - timedelta(days=1)
+
+def main():
+
+    # set logging format
+    logging.basicConfig( filename = "Log/log.log"
+                       , format='%(asctime)s %(levelname)s: %(message)s'
+                       , datefmt='%d/%m/%Y %H:%M:%S'
+                       , level = logging.DEBUG
+                       )
+
+    logging.info("Let's start polling!")
+
+    api = KrakenAPI()
+
+    lastBuyDatetime = getLastBuyDatetime()
+    currentDatetime = datetime.now()
+
+    while True:
+
+        weekday = datetime.today().weekday()
+        config = loadConfig(weekday)
+
+        lastBuyDate = lastBuyDatetime.date()
+
+        currentDatetime = datetime.now()
+        currentDate = currentDatetime.date()
+
+        bought_today = lastBuyDate == currentDate
+
+        if config['do_buy'] and not bought_today:
+
+            currentTime = currentDatetime.time().hour
+
+            if currentTime == config['buy_time']:
+                # buy, and set last buy time if successful
+                if buy(api, config): lastBuyDatetime = datetime.now()
+            else: logging.info("No action this time around.")
+
+        else: logging.info("No action this time around.")
+
+        end = datetime.now()
+        sleep_time = (timedelta(minutes=10) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()
+        if sleep_time > 0:
+            sleep(sleep_time)
+
+if __name__ == "__main__":
+    main()
