@@ -67,7 +67,14 @@ If you run these on the Pi through SSH, you may want to use the ```nohup``` comm
 When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database. This way, any order you place manually will not interfere with the bot.
 
 # Note
-This was a quick project of mine, and I usually don't code Python. As such, some (or much) of the code may be a bit hacky.
+I see myself as a functional programmer. This was a quick project of mine, and I usually don't code Python. As such, some (or much) of the code may be a bit hacky.
+
+Also, the bot was written with Euro as the currency to buy with. If you want to use another currency, you'd have to change:
+* ```pair``` in ```Config/config.ini```,
+* the balance computation in ```dcapoll.py```, and
+* the euro symbols in ```dcapoll.py```.
+
+If you the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change ```dcapoll.py``` yourself.
 
 # Credits
 First off, this small project was inspired by [this project](https://www.reddit.com/r/CryptoCurrency/comments/d737wg/i_set_up_a_raspberry_pi_trading_bot_with_an_eink/) by u/brutang, and the background image was found on [this page](https://www.electromaker.io/project/view/taking-the-raspberry-pi-inky-phat-to-the-next-level), though it has been edited a bit.
