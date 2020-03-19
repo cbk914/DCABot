@@ -68,4 +68,4 @@ This was a quick project of mine, and I usually don't code Python. As such, some
 # Credits
 First off, this small project was inspired by [this project](https://www.reddit.com/r/CryptoCurrency/comments/d737wg/i_set_up_a_raspberry_pi_trading_bot_with_an_eink/) by u/brutang, and the background image was found on [this page](https://www.electromaker.io/project/view/taking-the-raspberry-pi-inky-phat-to-the-next-level), though it has been edited a bit.
 
-I also got some code and ideas [https://github.com/Dodo33/btfd-bitcoin-bot](this repo) (e.g. config loading).
+I also got some code and ideas [this repo](https://github.com/Dodo33/btfd-bitcoin-bot) (e.g. config loading).
