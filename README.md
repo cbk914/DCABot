@@ -1,6 +1,8 @@
 # Configurable DCA bot (for Raspberry Pi)
 I have wanted to try out (crypto) dollar-cost averaging for quite some time now. However, Kraken (which is my exchange of choice) does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
 
+Quick overview [here](https://www.reddit.com/r/CryptoCurrency/comments/fkvsb7/i_made_a_configurable_dca_bot_using_a_raspberry/).
+
 The bot blindly buys some amount of crypto every day. The following things can be configured:
 
 * what time of day to buy,
