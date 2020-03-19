@@ -38,6 +38,7 @@ This bot has been written for the Raspberry Pi with the [https://shop.pimoroni.c
 
 Install the Kraken API:
 ```pip3 install krakenex```
+
 Install inky:
 ```pip3 install inky```
 
@@ -45,6 +46,7 @@ You may need to install other modules. You'll find out when you try to run it.
 
 Make the database directory:
 ```mkdir Database```
+
 Make the log directory:
 ```mkdir Log```
 
