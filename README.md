@@ -1,1 +1,3 @@
-# DCABot
+# Configurable DCA bot
+
+
