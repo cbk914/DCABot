@@ -76,7 +76,7 @@ Also, the bot was written with Euro as the currency to buy with. If you want to 
 
 If you the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change ```dcapoll.py``` yourself.
 
-Finally, though I have set the inky pHAT display to be black/white only for faster update times, note that ```dcapoll.py``` was written with the yellow/black/white inky pHAT display in mind. Change all occurrences of ```inkyphat.YELLOW``` to ```inkyphat.RED``` if you are using the red/black/white display.
+Finally, though I have set the Inky pHAT display to be black/white only for faster update times, note that ```dcapoll.py``` was written with the yellow/black/white Inky pHAT display in mind. Change all occurrences of ```inkyphat.YELLOW``` to ```inkyphat.RED``` if you are using the red/black/white display.
 
 # Credits
 First off, this small project was inspired by [this project](https://www.reddit.com/r/CryptoCurrency/comments/d737wg/i_set_up_a_raspberry_pi_trading_bot_with_an_eink/) by u/brutang, and the background image was found on [this page](https://www.electromaker.io/project/view/taking-the-raspberry-pi-inky-phat-to-the-next-level), though it has been edited a bit.
