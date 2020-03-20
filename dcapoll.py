@@ -42,7 +42,7 @@ def main():
         ### begin drawing
 
         # set background
-        img = Image.open("resources/bg.png")
+        img = Image.open("Resources/bg.png")
 
         # make canvas
         draw = ImageDraw.Draw(img)

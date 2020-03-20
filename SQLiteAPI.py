@@ -1,8 +1,8 @@
 import sqlite3
 
 # simple database interface
-# NOTE: this executed queries without preparing them.
-# Not a good practice, but since the database is only
+# NOTE: this executes queries without preparing them.
+# not a good practice, but since the database is only
 # accessed by the bot (with data from Kraken), we
 # should be okay.
 class Orders(object):
