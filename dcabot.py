@@ -1,6 +1,5 @@
 from time import time, sleep
 from datetime import datetime, timedelta
-
 import logging
 
 from KrakenAPI import KrakenAPI
@@ -60,13 +59,13 @@ def getLastBuyDatetime():
 def main():
 
     # set logging format
-    logging.basicConfig( filename = "Log/log.log"
+    logging.basicConfig( filename = "Log/dca.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
                        , datefmt='%d/%m/%Y %H:%M:%S'
                        , level = logging.DEBUG
                        )
 
-    logging.info("Let's start polling!")
+    logging.info("Let's start buying!")
 
     api = KrakenAPI()
 
@@ -91,7 +90,8 @@ def main():
 
                 if currentTime >= config['buy_time']:
                     # buy, and set last buy time if successful
-                    if buy(api, config['pair'], config['amount']): lastBuyDatetime = datetime.now()
+                    if buy(api, config['pair'], config['amount']):
+                        lastBuyDatetime = datetime.now()
                 else: logging.info("No action this time around.")
 
             else: logging.info("No action this time around.")

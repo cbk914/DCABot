@@ -1,6 +1,6 @@
 Config/kraken.key
 Database/orders.db
-Log/log.log
+Log/*
 __pycache__
 .dcapid
 .pollpid

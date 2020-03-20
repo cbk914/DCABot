@@ -3,10 +3,20 @@ from inky import InkyPHAT
 from datetime import datetime, timedelta
 from time import time, sleep
 from subprocess import check_output
+import logging
 
 from BotStats import BotStats
 
 def main():
+
+    # set logging format
+    logging.basicConfig( filename = "Log/poll.log"
+                       , format='%(asctime)s %(levelname)s: %(message)s'
+                       , datefmt='%d/%m/%Y %H:%M:%S'
+                       , level = logging.DEBUG
+                       )
+
+    logging.info("Let's start polling!")
 
     # choose font
     font_path = "Resources/Coder's Crux.ttf"
@@ -25,7 +35,10 @@ def main():
         img = Image.open("Resources/bg.png")
 
         try:
-            ### getting info
+
+            ####################
+            ### getting info ###
+            ####################
 
             # get stats objects
             stats = BotStats()
@@ -42,8 +55,9 @@ def main():
             # get local (ssh) ip
             ipstr = check_output(['hostname', '-I']).decode('ascii').strip()
 
-
-            ### begin drawing
+            #####################
+            ### begin drawing ###
+            #####################
 
             # make canvas
             draw = ImageDraw.Draw(img)
@@ -121,7 +135,7 @@ def main():
         inkyphat.show()
 
         # sleep until the nearest 10:30 min mark
-        # because the DCA bot will buy at the 20 min mark
+        # because the DCA bot will buy at the 10:00 min mark
         end = datetime.now()
         sleep_time = (timedelta(minutes=10, seconds=30) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()
         if sleep_time > 0:
