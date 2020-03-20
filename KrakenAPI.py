@@ -10,12 +10,12 @@ class KrakenAPI:
         self.kraken = krakenex.API()
         self.kraken.load_key('Config/kraken.key')
 
-    def openLimitBuyOrder(self, pair, price, eurVolume):
-        if self.getBalance(pair[-4:]) < eurVolume:
+    def openLimitBuyOrder(self, pair, amount, price):
+        if self.getBalance(pair[-4:]) < amount:
             logging.warning("Not enough " + pair[-3:] + ". Order not placed.")
             return 0
 
-        btcAmount = eurVolume / price
+        btcAmount = amount / price
         result = self.__sendQuery('AddOrder', { 'pair'     : pair
                                               , 'type'     : 'buy'
                                               , 'ordertype': 'limit'
@@ -25,13 +25,13 @@ class KrakenAPI:
         return result['result']['txid'][0]
 
     # return order ID
-    def openMarketBuyOrder(self, pair, eurVolume):
-        if self.getBalance(pair[-4:]) < eurVolume:
+    def openMarketBuyOrder(self, pair, amount):
+        if self.getBalance(pair[-4:]) < amount:
             logging.warning("Not enough " + pair[-3:] + ". Order not placed.")
             return (0, 0)
 
         bestAskPrice = self.getSecondBestBidPrice(pair)
-        btcAmount = eurVolume / float(bestAskPrice)
+        btcAmount = amount / float(bestAskPrice)
         result = self.__sendQuery('AddOrder', { 'pair'     : pair
                                               , 'type'     : 'buy'
                                               , 'ordertype': 'market'
@@ -40,7 +40,7 @@ class KrakenAPI:
         return (result['result']['txid'][0], bestAskPrice)
 
     def cancelOrder(self, txid):
-        return self.__sendQuery(txid, public=False)
+        return self.__sendQuery('CancelOrder', { 'txid' : txid }, public=False)
 
     def getOrderBook(self, pair, count = 10):
         response = self.__sendQuery('Depth', {'pair': pair, 'count': str(count)})

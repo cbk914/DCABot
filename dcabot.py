@@ -21,10 +21,10 @@ def close_order(api, closed_orders, txid):
 # place a market order based on today's config
 # if the order isn't closed after 10 seconds,
 # cancel it and place a new one
-def buy(api, config):
+def buy(api, pair, amount): #config):
     logging.info("Attempting to buy...")
     while True:
-        (txid, _) = api.openMarketBuyOrder(config['pair'], config['amount'])
+        (txid, _) = api.openMarketBuyOrder(pair, amount)
         if txid != 0:
             # give the order 10 seconds to close
             sleep(10)
@@ -32,20 +32,20 @@ def buy(api, config):
             if txid in closed_orders:
                 close_order(txid, closed_orders, txid)
                 return True
-            else:
-                # cancel order
+            else: # cancel order
                 api.cancelOrder(txid)
-                openOrders = api.getOpenOrders['result']['open']
+                openOrders = api.getOpenOrders()['result']['open']
                 # wait until order is not open anymore
                 while txid in openOrders:
-                    sleep(5)
+                    sleep(10)
                     openOrders = api.getOpenOrders['result']['open']
                 closed_orders = api.getClosedOrders()['result']['closed']
-                if txid in closed_orders: # save information if it closed after all
+                # save information if it closed after all
+                if closed_orders[txid]['status'] == 'closed':
                     close_order(txid, closed_orders, txid)
                     return True
-        else:
-            # not enough money, terminate
+                # otherwise it's cancelled; try again
+        else: # not enough money, terminate
             return False
 
 # get the timestamp of latest order
@@ -91,7 +91,7 @@ def main():
 
             if currentTime == config['buy_time']:
                 # buy, and set last buy time if successful
-                if buy(api, config): lastBuyDatetime = datetime.now()
+                if buy(api, config['pair'], config['amount']): lastBuyDatetime = datetime.now()
             else: logging.info("No action this time around.")
 
         else: logging.info("No action this time around.")
@@ -103,3 +103,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

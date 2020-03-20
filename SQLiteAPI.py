@@ -19,10 +19,6 @@ class Orders(object):
         self.__cur.execute(sql, info)
         return self.__cur.lastrowid
 
-    def deleteOrder(self, txid):
-        sql = "DELETE FROM orders WHERE txid = ?"
-        self.__cur.execute(sql, (txid,))
-
     def getOrders(self):
         self.__cur.execute("SELECT txid, curr, vol, cost, t '[timestamp]' FROM orders")
         return self.__cur.fetchall()
@@ -52,7 +48,3 @@ class Orders(object):
 
     def __create_table(self):
         self.__cur.execute("CREATE TABLE IF NOT EXISTS orders (txid TEXT PRIMARY KEY, curr TEXT, vol REAL, cost REAL, t TIMESTAMP DEFAULT CURRENT_TIMESTAMP)")
-
-    def printTable(self):
-        self.__cur.execute("SELECT * FROM orders")
-        print(self.__cur.fetchall())

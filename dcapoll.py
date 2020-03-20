@@ -168,7 +168,7 @@ def main():
 
         # sleep until the nearest 10 min mark
         end = datetime.now()
-        sleep_time = (timedelta(minutes=10) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()
+        sleep_time = (timedelta(minutes=10, seconds=30) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()
         if sleep_time > 0:
             sleep(sleep_time)
 
