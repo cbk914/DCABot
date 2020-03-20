@@ -16,8 +16,6 @@ def main():
                        , level = logging.DEBUG
                        )
 
-    logging.info("Let's start polling!")
-
     # choose font
     font_path = "Resources/Coder's Crux.ttf"
     font = ImageFont.truetype(font_path, 16)
@@ -28,6 +26,8 @@ def main():
 
     # display alt color
     alt_color = inkyphat.YELLOW
+
+    logging.info("Let's start drawing!")
 
     while True:
 
