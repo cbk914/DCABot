@@ -2,7 +2,6 @@ from PIL import Image, ImageFont, ImageDraw
 from inky import InkyPHAT
 from datetime import datetime, timedelta
 from time import time, sleep
-#import subprocess
 from subprocess import check_output
 
 from BotStats import BotStats
@@ -34,7 +33,6 @@ def main():
         bought_and_spent = stats.get_bought_and_spent()
 
         # get timestamp
-#        timestamp = datetime.now()
         datetimestr = datetime.now().strftime("%d-%m-%Y %H:%M")
 
         # get local (ssh) ip
@@ -51,33 +49,6 @@ def main():
 
         ## DRAW current timestamp
         draw.text((7, 8), datetimestr, inkyphat.BLACK, font=font)
-
-        ## DRAW header line
-        # TODO: make part of bakcground?
-        for y in range(18,20):
-            for x in range(108, 203):
-                img.putpixel((x, y), alt_color)
-
-        ## DRAW today header centered
-        todaystr = 'TODAY'
-        if todays_info['bought_today']:
-            todaystr += ' (bought)'
-        (today_w, _) = font.getsize(todaystr)
-        today_x = (inkyphat.WIDTH - 10) / 4 * 3 + 5 - today_w / 2
-        draw.text((today_x, 8), todaystr, inkyphat.WHITE, font=font)
-
-        ## DRAW config info
-        y_offset = 22
-        if todays_info['do_buy']:
-            buy_timestr = "time {0:>0} H".format(todays_info['buy_time'])
-            pairstr     = "pair {0:>0}".format(todays_info['pair'])
-            amountstr   = "amnt {0:>0,.2f} €".format(todays_info['amount'])
-
-            draw.text((110, y_offset),    buy_timestr, inkyphat.WHITE, font=font)
-            draw.text((110, y_offset+8),  pairstr,     inkyphat.WHITE, font=font)
-            draw.text((110, y_offset+16), amountstr,   inkyphat.WHITE, font=font)
-        else:
-            draw.text((110, y_offset), 'Not buying -.-', inkyphat.WHITE, font=font)
 
         ## DRAW bought and spent
         y_offset = 22
@@ -99,11 +70,32 @@ def main():
         percent_x = inkyphat.WIDTH / 4 - percent_w / 2
         draw.text((percent_x, 89), percentstr, inkyphat.WHITE, font=font)
 
-        ## DRAW separating line
+        ## DRAW today header centered
+        todaystr = 'TODAY'
+        if todays_info['bought_today']:
+            todaystr += ' (bought)'
+        (today_w, _) = font.getsize(todaystr)
+        today_x = (inkyphat.WIDTH - 10) / 4 * 3 + 5 - today_w / 2
+        draw.text((today_x, 8), todaystr, inkyphat.WHITE, font=font)
+
+        ## DRAW header line
         # TODO: make part of bakcground?
-        for y in range(86, 99):
-            for x in range(106,107):
+        for y in range(18,20):
+            for x in range(108, 203):
                 img.putpixel((x, y), alt_color)
+
+        ## DRAW config info
+        y_offset = 22
+        if todays_info['do_buy']:
+            buy_timestr = "time {0:>0} H".format(todays_info['buy_time'])
+            pairstr     = "pair {0:>0}".format(todays_info['pair'])
+            amountstr   = "amnt {0:>0,.2f} €".format(todays_info['amount'])
+
+            draw.text((110, y_offset),    buy_timestr, inkyphat.WHITE, font=font)
+            draw.text((110, y_offset+8),  pairstr,     inkyphat.WHITE, font=font)
+            draw.text((110, y_offset+16), amountstr,   inkyphat.WHITE, font=font)
+        else:
+            draw.text((110, y_offset), 'Not buying -.-', inkyphat.WHITE, font=font)
 
         ## DRAW balance and days left
         offset = 54
@@ -112,6 +104,12 @@ def main():
 
         ## DRAW (SSH) IP
         draw.text((110, 89), ipstr, inkyphat.WHITE, font=font)
+
+        ## DRAW line separating percent and IP
+        # TODO: make part of bakcground?
+        for y in range(86, 99):
+            for x in range(106,107):
+                img.putpixel((x, y), alt_color)
 
         # finally rotate and show picture
         flipped = img.rotate(180)
