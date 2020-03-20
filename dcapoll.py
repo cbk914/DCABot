@@ -9,7 +9,7 @@ from BotStats import BotStats
 def main():
 
     # choose font
-    font_path = "resources/Coder's Crux.ttf"
+    font_path = "Resources/Coder's Crux.ttf"
     font = ImageFont.truetype(font_path, 16)
 
     # no color for now, updates faster
