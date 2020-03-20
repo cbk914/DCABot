@@ -36,7 +36,7 @@ To do:
 Any feedback and/or advice would be great.
 
 # Setup
-This bot has been written for the Raspberry Pi with the [https://shop.pimoroni.com/products/inky-phat?variant=12549254217811](inky pHAT e-ink display).
+This bot has been written for the Raspberry Pi with the [Inky pHAT e-ink display](https://shop.pimoroni.com/products/inky-phat?variant=12549254217811).
 
 Install the Kraken API:
 ```pip3 install krakenex```
