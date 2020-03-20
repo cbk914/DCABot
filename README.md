@@ -82,3 +82,12 @@ Finally, though I have set the Inky pHAT display to be black/white only for fast
 First off, this small project was inspired by [this project](https://www.reddit.com/r/CryptoCurrency/comments/d737wg/i_set_up_a_raspberry_pi_trading_bot_with_an_eink/) by u/brutang, and the background image was found on [this page](https://www.electromaker.io/project/view/taking-the-raspberry-pi-inky-phat-to-the-next-level), though it has been edited a bit.
 
 I also got some code and ideas [this repo](https://github.com/Dodo33/btfd-bitcoin-bot) (e.g. config loading).
+
+# Donate
+This isn't a grand project but if you feel like it, I would appreciate small donations:
+
+XTZ  @ tz1RWPDoMABjLect6dkETjPWgva5SRMtWGVw
+XBT  @ 3QFYdxE4wUuv2GWSF3RfXL2t8gjMrFE9bS
+ETH  @ 0x6e9644FaD57F93b58573bAdEe3Cb0596F32C9852
+LTC  @ MUyMZejFyJsVpmZ5omg8yzh6nRQwhdQM5U
+DASH @ Xe6VHQi5DPdufsGSSWRg5ZmPkiU4oBxebQ
