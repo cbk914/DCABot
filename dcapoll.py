@@ -63,7 +63,7 @@ def main():
         if todays_info['bought_today']:
             todaystr += ' (bought)'
         (today_w, _) = font.getsize(todaystr)
-        today_x = (inkyphat.WIDTH - 12) / 4 * 3 + 5 - today_w / 2
+        today_x = (inkyphat.WIDTH - 10) / 4 * 3 + 5 - today_w / 2
         draw.text((today_x, 8), todaystr, inkyphat.WHITE, font=font)
 
         ## DRAW config info
