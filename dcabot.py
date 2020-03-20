@@ -71,30 +71,33 @@ def main():
     api = KrakenAPI()
 
     lastBuyDatetime = getLastBuyDatetime()
-    currentDatetime = datetime.now()
 
     while True:
 
-        weekday = datetime.today().weekday()
-        config = loadConfig(weekday)
+        try:
+            weekday = datetime.today().weekday()
+            config = loadConfig(weekday)
 
-        lastBuyDate = lastBuyDatetime.date()
+            lastBuyDate = lastBuyDatetime.date()
 
-        currentDatetime = datetime.now()
-        currentDate = currentDatetime.date()
+            currentDatetime = datetime.now()
+            currentDate = currentDatetime.date()
 
-        bought_today = lastBuyDate == currentDate
+            bought_today = lastBuyDate == currentDate
 
-        if config['do_buy'] and not bought_today:
+            if config['do_buy'] and not bought_today:
 
-            currentTime = currentDatetime.time().hour
+                currentTime = currentDatetime.time()
 
-            if currentTime == config['buy_time']:
-                # buy, and set last buy time if successful
-                if buy(api, config['pair'], config['amount']): lastBuyDatetime = datetime.now()
+                if currentTime >= config['buy_time']:
+                    # buy, and set last buy time if successful
+                    if buy(api, config['pair'], config['amount']): lastBuyDatetime = datetime.now()
+                else: logging.info("No action this time around.")
+
             else: logging.info("No action this time around.")
 
-        else: logging.info("No action this time around.")
+        except Exception as exc:
+            logging.critical("Exception " + str(exc.__class__.__name__) + " : " + str(exc))
 
         end = datetime.now()
         sleep_time = (timedelta(minutes=10) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()

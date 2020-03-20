@@ -1,13 +1,13 @@
 from configparser import ConfigParser
-import logging
+from datetime import datetime
 
-# load a given weekday's config
+# load a given weekday's parser
 # the weekday is given as an integer:
 # monday = 0, tuesday = 1, etc.
 def loadConfig(weekday):
-    config = ConfigParser()
-    config.read('Config/config.ini')
-    info = {}
+    parser = ConfigParser()
+    parser.read('Config/config.ini')
+    config = {}
 
     weekdays = [ "monday"
                , "tuesday"
@@ -17,25 +17,22 @@ def loadConfig(weekday):
                , "saturday"
                , "sunday"
                ]
-    try:
-        info["do_buy"]          = config['default'].getboolean("do_buy")
-        info["pair"]            = config['default'].get("pair")
-        info["amount"]          = config['default'].getfloat('amount')
-        info["buy_time"]        = config['default'].getint('buy_time')
 
-        today = weekdays[weekday]
+    config["do_buy"]   = parser['default'].getboolean("do_buy")
+    config["pair"]     = parser['default'].get("pair")
+    config["amount"]   = parser['default'].getfloat('amount')
+    config["buy_time"] = datetime.strptime(parser['default'].get('buy_time'), "%H:%M").time()
 
-        if today in config:
-            do_buy = config[today].getboolean("do_buy")
-            if do_buy: info["do_buy"] = do_buy
-            pair = config[today].get("pair")
-            if pair: info["pair"] = pair
-            amount = config[today].getfloat('amount')
-            if amount: info["amount"] = amount
-            buy_time = config[today].getint('buy_time')
-            if buy_time: info["buy_time"] = buy_time
+    today = weekdays[weekday]
 
-    except Exception as exc:
-        logging.critical("Exception " + str(exc.__class__.__name__) + " : " + str(exc))
+    if today in parser:
+        do_buy = parser[today].getboolean("do_buy")
+        if do_buy: config["do_buy"] = do_buy
+        pair = parser[today].get("pair")
+        if pair: config["pair"] = pair
+        amount = parser[today].getfloat('amount')
+        if amount: config["amount"] = amount
+        buy_time = parser[today].getint('buy_time')
+        if buy_time: config["buy_time"] = buy_time
 
-    return info
+    return config
