@@ -74,7 +74,7 @@ Also, the bot was written with Euro as the currency to buy with. If you want to 
 * the balance computation in ```dcapoll.py```, and
 * the euro symbols in ```dcapoll.py```.
 
-If you the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change ```dcapoll.py``` yourself.
+If you want the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change ```dcapoll.py``` yourself.
 
 Finally, though I have set the Inky pHAT display to be black/white only for faster update times, note that ```dcapoll.py``` was written with the yellow/black/white Inky pHAT display in mind. Change all occurrences of ```inkyphat.YELLOW``` to ```inkyphat.RED``` if you are using the red/black/white display.
 
