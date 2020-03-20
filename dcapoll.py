@@ -86,18 +86,10 @@ def main():
             draw.text((percent_x, 89), percentstr, inkyphat.WHITE, font=font)
 
             ## DRAW today header centered
-            todaystr = 'TODAY'
-            if todays_info['bought_today']:
-                todaystr += ' (bought)'
+            todaystr = 'TODAY' + (' (bought)' if todays_info['bought_today'] else '')
             (today_w, _) = font.getsize(todaystr)
             today_x = (inkyphat.WIDTH - 10) / 4 * 3 + 5 - today_w / 2
             draw.text((today_x, 8), todaystr, inkyphat.WHITE, font=font)
-
-            ## DRAW header line
-            # TODO: make part of bakcground?
-            for y in range(18,20):
-                for x in range(108, 203):
-                    img.putpixel((x, y), alt_color)
 
             ## DRAW config info
             y_offset = 22
@@ -120,17 +112,11 @@ def main():
             ## DRAW (SSH) IP
             draw.text((110, 89), ipstr, inkyphat.WHITE, font=font)
 
-            ## DRAW line separating percent and IP
-            # TODO: make part of bakcground?
-            for y in range(86, 99):
-                for x in range(106,107):
-                    img.putpixel((x, y), alt_color)
-
         except Exception as exc:
             logging.critical("Exception " + str(exc.__class__.__name__) + " : " + str(exc))
 
         # finally rotate and show picture
-        flipped = img.rotate(180)
+        flipped = img.rotate(180) # NOTE: depends on Pi's orientation
         inkyphat.set_image(flipped)
         inkyphat.show()
 
@@ -143,3 +129,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
