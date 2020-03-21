@@ -6,7 +6,7 @@ from datetime import datetime
 # monday = 0, tuesday = 1, etc.
 def loadConfig(weekday):
     parser = ConfigParser()
-    parser.read('Config/config.ini')
+    parser.read('config/config.ini')
     config = {}
 
     weekdays = [ "monday"

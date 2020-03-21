@@ -10,14 +10,14 @@ from BotStats import BotStats
 def main():
 
     # set logging format
-    logging.basicConfig( filename = "Log/poll.log"
+    logging.basicConfig( filename = "log/poll.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
                        , datefmt='%d/%m/%Y %H:%M:%S'
                        , level = logging.DEBUG
                        )
 
     # choose font
-    font_path = "Resources/Coder's Crux.ttf"
+    font_path = "resources/Coder's Crux.ttf"
     font = ImageFont.truetype(font_path, 16)
 
     # no color for now, updates faster
@@ -32,7 +32,7 @@ def main():
     while True:
 
         # set background
-        img = Image.open("Resources/bg.png")
+        img = Image.open("resources/bg.png")
 
         try:
 

@@ -6,7 +6,7 @@ import sqlite3
 # accessed by the bot (with data from Kraken), we
 # should be okay.
 class Orders(object):
-    __DB_LOCATION = "Database/orders.db"
+    __DB_LOCATION = "database/orders.db"
 
     def __init__(self):
         self.__conn = sqlite3.connect(Orders.__DB_LOCATION, detect_types=sqlite3.PARSE_COLNAMES)

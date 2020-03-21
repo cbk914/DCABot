@@ -8,7 +8,7 @@ from time import time, sleep
 class KrakenAPI:
     def __init__(self):
         self.kraken = krakenex.API()
-        self.kraken.load_key('Config/kraken.key')
+        self.kraken.load_key('config/kraken.key')
 
     def openLimitBuyOrder(self, pair, amount, price):
         if self.getBalance(pair[-4:]) < amount:

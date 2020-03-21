@@ -59,7 +59,7 @@ def getLastBuyDatetime():
 def main():
 
     # set logging format
-    logging.basicConfig( filename = "Log/dca.log"
+    logging.basicConfig( filename = "log/dca.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
                        , datefmt='%d/%m/%Y %H:%M:%S'
                        , level = logging.DEBUG
