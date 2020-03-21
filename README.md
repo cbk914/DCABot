@@ -45,7 +45,7 @@ Make the database directory by running `mkdir src/database`.
 
 Make the log directory by running `mkdir src/log`.
 
-[Generate an API key on Kraken](https://support.kraken.com/hc/en-us/articles/360022839451-Generate-API-Keys) and create the API key file ```src/config/kraken.key``` with the content:
+[Generate an API key on Kraken](https://support.kraken.com/hc/en-us/articles/360022839451-Generate-API-Keys) and create the API key file ```src/config/kraken.key``` with the following content:
 ```
 Public API key
 Private API key
