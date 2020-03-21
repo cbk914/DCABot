@@ -56,13 +56,13 @@ The API key should allow the following:
 * Placing orders
 
 ## Usage
-The actual DCA bot can be found in `src/dcabot.py`. Run it by issuing the command `python3 src/dcabot.py`. It will write info to `src/log/dca.log`.
+The actual DCA bot can be found in `src/dcabot.py`. Run it by issuing the command `python3 src/dcabot.py`. It will write debug info to `src/log/dca.log`.
 
-The monitor program that will fetch the DCA bot stats and display them on the screen is, as mentioned, `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write info to `src/log/poll.log`.
+The monitor program that will fetch the DCA bot stats and display them on the screen is, as mentioned, `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write debug info to `src/log/poll.log`.
 
 If you want to run these on the Pi through SSH, you may want to use the ```nohup``` command. Entering `make run` in the `src/` directory will run them using `nohup` and save their PIDs to individual dotfiles. Conversely, `make kill` will kill the processes using these dotfiles.
 
-When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database, `src/database/orders.db`. This way, any order you place manually (or with another bot) will not interfere with the bot.
+When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database, `src/database/orders.db`. This way, any order you place manually (or with another bot) will not interfere with this bot.
 
 ## Note
 I see myself as a functional programmer. This was a quick project of mine, and I usually don't code Python. As such, some (or much) of the code may be unelegant.
