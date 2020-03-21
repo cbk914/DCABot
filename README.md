@@ -36,7 +36,7 @@ The right half, on the other hand, will show the following:
 * How many days are left based on the weekly configuration
 * The local (SSH) IP address
 
-The `BotStats` class makes it simple to write other monitor programs such as for the Inky wHAT or the terminal.
+The `BotStats` class in `src/BotStats.py` makes it simple to write other monitor programs such as for the Inky wHAT or the terminal.
 
 ## Installation
 The bot uses the `krakenex` Kraken API. The monitor uses the `inky` and `Pillow` packages. Install all by running `pip3 install -r requirements.txt` in the root directory of the repo.
