@@ -3,7 +3,7 @@
 I have wanted to try out dollar cost averaging (DCA) for quite some time now. However, Kraken---which is my exchange of choice---does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
 
 ## What exactly does it do?
-From [Binance Academy]([https://www.binance.vision/glossary/dollar-cost-averaging](https://www.binance.vision/glossary/dollar-cost-averaging)):
+From [Binance Academy](https://www.binance.vision/glossary/dollar-cost-averaging):
 >Dollar cost averaging refers to the practice of investing fixed amounts at regular intervals (for instance, $20 every week). This is a strategy used by investors that wish to reduce the influence of volatility over their investment and, therefore, reduce their risk exposure.
 
 Simply put, the bot blindly buys some amount of crypto every day. The following things can be configured:
@@ -19,8 +19,8 @@ Check `src/config/config.ini` directory for an example configuration.
 ![My RPi setup](https://raw.githubusercontent.com/LarsVadgaard/DCABot/master/images/setup1.jpg)
 I wrote this bot for my Raspberry Pi, but it should be able to run on any machine with Python 3 installed. If you want my exact setup, you will need:
 * Raspberry Pi (I use 3 B+) with Raspbian and power supply
-* [Pimoroni Inky pHAT]([https://shop.pimoroni.com/products/inky-phat?variant=12549254905939](https://shop.pimoroni.com/products/inky-phat?variant=12549254905939))
-* [Pibow 3 B+ Coupé]([https://shop.pimoroni.com/products/pibow-coupe-for-raspberry-pi-3-b-plus?variant=2601027993610](https://shop.pimoroni.com/products/pibow-coupe-for-raspberry-pi-3-b-plus?variant=2601027993610))
+* [Pimoroni Inky pHAT][https://shop.pimoroni.com/products/inky-phat?variant=12549254905939]
+* [Pibow 3 B+ Coupé][https://shop.pimoroni.com/products/pibow-coupe-for-raspberry-pi-3-b-plus?variant=2601027993610]
 
 If you choose to run the bot on this setup, you can run a separate monitor program `dcapoll.py` to show some stats on the Inky pHAT display as seen in the picture---with 10 minute intervals. The left half of the display will show the following:
 * Timestamp of last display update
