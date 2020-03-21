@@ -24,9 +24,6 @@ def main():
     inkyphat = InkyPHAT('black')
     inkyphat.set_border(inkyphat.BLACK)
 
-    # display alt color
-    alt_color = inkyphat.YELLOW
-
     logging.info("Let's start drawing!")
 
     while True:
