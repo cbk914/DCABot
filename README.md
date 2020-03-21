@@ -13,8 +13,6 @@ Simply put, the bot blindly buys some amount of crypto every day. The following 
 
 Further, each day of the week can be configured independently such that it will buy e.g. Bitcoin for 20€ on some weekdays, and Tezos for 10€ on the other weekdays. Finally, it can be configured to not buy anything at all on specific weekdays.
 
-Do note that the bot will buy if it hasn't done so already that day, as long as the current time is **larger than or equal** to the configured time to buy.
-
 Check `src/config/config.ini` directory for an example configuration.
 
 ## Hardware
@@ -24,7 +22,7 @@ I wrote this bot for my Raspberry Pi, but it should be able to run on any machin
 * [Pimoroni Inky pHAT]([https://shop.pimoroni.com/products/inky-phat?variant=12549254905939](https://shop.pimoroni.com/products/inky-phat?variant=12549254905939))
 * [Pibow 3 B+ Coupé]([https://shop.pimoroni.com/products/pibow-coupe-for-raspberry-pi-3-b-plus?variant=2601027993610](https://shop.pimoroni.com/products/pibow-coupe-for-raspberry-pi-3-b-plus?variant=2601027993610))
 
-If you choose to run the bot on this setup, you can run a separate program `dcapoll.py` to show some stats on the Inky pHAT display as seen in the picture---with 10 minute intervals. The left half of the display will show the following:
+If you choose to run the bot on this setup, you can run a separate monitor program `dcapoll.py` to show some stats on the Inky pHAT display as seen in the picture---with 10 minute intervals. The left half of the display will show the following:
 * Timestamp of last display update
 * How much XBT, ETH, and XTZ the bot has bought
 * How much I have spent in total
@@ -58,9 +56,9 @@ The API key should allow the following:
 ## Usage
 The actual DCA bot can be found in `src/dcabot.py`. Run it by issuing the command `python3 src/dcabot.py`. It will write info to `src/log/dca.log`.
 
-The program that will fetch the DCA bot stats and display them on the screen is, as mentioned, `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write info to `src/log/poll.log`.
+The monitor program that will fetch the DCA bot stats and display them on the screen is, as mentioned, `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write info to `src/log/poll.log`.
 
-If you want to run these on the Pi through SSH, you may want to use the ```nohup``` command. Entering `make run` in the `src/` directory will run them using `nohup`. Conversely, `make kill` will kill the processes.
+If you want to run these on the Pi through SSH, you may want to use the ```nohup``` command. Entering `make run` in the `src/` directory will run them using `nohup` and save their PIDs to individual dotfiles. Conversely, `make kill` will kill the processes using these dotfiles.
 
 When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database, `src/database/orders.db`. This way, any order you place manually (or with another bot) will not interfere with the bot.
 
