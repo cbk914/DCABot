@@ -18,7 +18,7 @@ Do note that the bot will buy if it hasn't done so already that day, as long as 
 Check `src/config/config.ini` directory for an example configuration.
 
 ## Hardware
-![enter image description here](images/setup1.jpg =550x)
+![My RPi setup](https://raw.githubusercontent.com/LarsVadgaard/DCABot/master/images/setup1.jpg =550x)
 I wrote this bot for my Raspberry Pi, but it should be able to run on any machine with Python 3 installed. If you want my exact setup, you will need:
 * Raspberry Pi (I use 3 B+) with Raspbian and power supply
 * [Pimoroni Inky pHAT]([https://shop.pimoroni.com/products/inky-phat?variant=12549254905939](https://shop.pimoroni.com/products/inky-phat?variant=12549254905939))
