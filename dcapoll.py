@@ -46,6 +46,7 @@ def main():
             # get today's info
             today = datetime.today().weekday()
             todays_info = stats.get_weekday_info(today)
+
             # get bought and spent
             bought_and_spent = stats.get_bought_and_spent()
 
@@ -74,10 +75,10 @@ def main():
             draw.text((7, y_offset+8),  eth_infostr, inkyphat.BLACK, font=font)
             draw.text((7, y_offset+16), xtz_infostr, inkyphat.BLACK, font=font)
 
-            offset = 54
-            draw.text((7, offset),    "spent {0:>8,.2f} €".format(bought_and_spent['spent_sum']),   inkyphat.BLACK, font=font)
-            draw.text((7, offset+8),  "worth {0:>8,.2f} €".format(bought_and_spent['worth_sum']),   inkyphat.BLACK, font=font)
-            draw.text((7, offset+16), "chnge {0:>8,.2f} €".format(bought_and_spent['euro_change']), inkyphat.BLACK, font=font)
+            y_offset = 54
+            draw.text((7, y_offset),    "spent {0:>8,.2f} €".format(bought_and_spent['spent_sum']),   inkyphat.BLACK, font=font)
+            draw.text((7, y_offset+8),  "worth {0:>8,.2f} €".format(bought_and_spent['worth_sum']),   inkyphat.BLACK, font=font)
+            draw.text((7, y_offset+16), "chnge {0:>8,.2f} €".format(bought_and_spent['euro_change']), inkyphat.BLACK, font=font)
 
             ## DRAW percent centered
             percentstr = "{0:.2f}%".format(bought_and_spent['perc_change'])
@@ -105,9 +106,9 @@ def main():
                 draw.text((110, y_offset), 'Not buying -.-', inkyphat.WHITE, font=font)
 
             ## DRAW balance and days left
-            offset = 54
-            draw.text((110, offset),   "blce {0:>0,.2f} €".format(todays_info['balance']), inkyphat.WHITE, font=font)
-            draw.text((110, offset+8), "days {0:>0}".format(todays_info['left']),          inkyphat.WHITE, font=font)
+            y_offset = 54
+            draw.text((110, y_offset),   "blce {0:>0,.2f} €".format(todays_info['balance']), inkyphat.WHITE, font=font)
+            draw.text((110, y_offset+8), "days {0:>0}".format(todays_info['left']),          inkyphat.WHITE, font=font)
 
             ## DRAW (SSH) IP
             draw.text((110, 89), ipstr, inkyphat.WHITE, font=font)
@@ -129,4 +130,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
