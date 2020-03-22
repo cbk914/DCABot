@@ -1,5 +1,5 @@
 # Configurable DCA bot for crypto
-I have wanted to try out dollar cost averaging (DCA) for quite some time now. However, Kraken---which is my exchange of choice---does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
+I have wanted to try out dollar cost averaging (DCA) for quite some time now, as it's an easy way to stack coins without worrying about price fluctuations. However, Kraken---which is my exchange of choice---does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
 
 ## What exactly does it do?
 From [Binance Academy](https://www.binance.vision/glossary/dollar-cost-averaging):
