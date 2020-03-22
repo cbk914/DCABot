@@ -10,6 +10,12 @@ class KrakenAPI:
         self.kraken = krakenex.API()
         self.kraken.load_key('config/kraken.key')
 
+    def getTradePair(self, crypto, fiat):
+        response = self.__sendQuery('AssetPairs')
+        asset_pairs = response['result']
+        pairs = [k for k in asset_pairs if asset_pairs[k]['altname'] == crypto + fiat]
+        return (pairs[0] if len(pairs) == 1 else None)
+
     def openLimitBuyOrder(self, pair, amount, price):
         if self.getBalance(pair[-4:]) < amount:
             logging.warning("Not enough " + pair[-3:] + ". Order not placed.")

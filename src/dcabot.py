@@ -25,14 +25,13 @@ def buy(api, pair, amount): #config):
     while True:
         (txid, _) = api.openMarketBuyOrder(pair, amount)
         if txid != 0:
-            # give the order 10 seconds to close
-            sleep(10)
+            sleep(10) # give the order 10 seconds to close
             closed_orders = api.getClosedOrders()['result']['closed']
             if txid in closed_orders:
                 close_order(txid, closed_orders, txid)
                 return True
-            else: # cancel order
-                api.cancelOrder(txid)
+            else:
+                api.cancelOrder(txid) # cancel order
                 openOrders = api.getOpenOrders()['result']['open']
                 # wait until order is not open anymore
                 while txid in openOrders:
@@ -76,6 +75,7 @@ def main():
         try:
             weekday = datetime.today().weekday()
             config = loadConfig(weekday)
+            pair = api.getTradePair(config['curr'], "EUR")
 
             lastBuyDate = lastBuyDatetime.date()
 
@@ -90,7 +90,7 @@ def main():
 
                 if currentTime >= config['buy_time']:
                     # buy, and set last buy time if successful
-                    if buy(api, config['pair'], config['amount']):
+                    if buy(api, pair, config['amount']):
                         lastBuyDatetime = datetime.now()
                 else: logging.info("No action this time around.")
 

@@ -19,7 +19,7 @@ def loadConfig(weekday):
                ]
 
     config["do_buy"]   = parser['default'].getboolean("do_buy")
-    config["pair"]     = parser['default'].get("pair")
+    config["curr"]     = parser['default'].get("curr")
     config["amount"]   = parser['default'].getfloat('amount')
     config["buy_time"] = datetime.strptime(parser['default'].get('buy_time'), "%H:%M").time()
 
@@ -28,8 +28,8 @@ def loadConfig(weekday):
     if today in parser:
         do_buy = parser[today].getboolean("do_buy")
         if do_buy: config["do_buy"] = do_buy
-        pair = parser[today].get("pair")
-        if pair: config["pair"] = pair
+        curr = parser[today].get("curr")
+        if curr: config["curr"] = curr
         amount = parser[today].getfloat('amount')
         if amount: config["amount"] = amount
         buy_time = parser[today].getint('buy_time')

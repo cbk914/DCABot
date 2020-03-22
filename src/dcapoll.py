@@ -44,8 +44,8 @@ def main():
             today = datetime.today().weekday()
             todays_info = stats.get_weekday_info(today)
 
-            # get bought and spent
-            bought_and_spent = stats.get_bought_and_spent()
+            # get bought and spent for given cryptos
+            bought_and_spent = stats.get_bought_and_spent(["XBT", "XTZ", "ETH"])
 
             # get timestamp
             datetimestr = datetime.now().strftime("%d-%m-%Y %H:%M")
@@ -65,12 +65,10 @@ def main():
 
             ## DRAW bought and spent
             y_offset = 22
-            xbt_infostr = "XBT {0:>12,.4f}".format(bought_and_spent['bought']['XBT'])
-            eth_infostr = "ETH {0:>12,.4f}".format(bought_and_spent['bought']['ETH'])
-            xtz_infostr = "XTZ {0:>12,.4f}".format(bought_and_spent['bought']['XTZ'])
-            draw.text((7, y_offset),    xbt_infostr, inkyphat.BLACK, font=font)
-            draw.text((7, y_offset+8),  eth_infostr, inkyphat.BLACK, font=font)
-            draw.text((7, y_offset+16), xtz_infostr, inkyphat.BLACK, font=font)
+            for (c, b) in bought_and_spent['bought'].items():
+                infostr = "{0:<4} {1:>11,.4f}".format(c, b)
+                draw.text((7, y_offset), infostr, inkyphat.BLACK, font=font)
+                y_offset += 8
 
             y_offset = 54
             draw.text((7, y_offset),    "spent {0:>8,.2f} €".format(bought_and_spent['spent_sum']),   inkyphat.BLACK, font=font)
@@ -93,7 +91,7 @@ def main():
             y_offset = 22
             if todays_info['do_buy']:
                 buy_timestr = "time {}".format(todays_info['buy_time'].strftime("%H:%M"))
-                pairstr     = "pair {0:>0}".format(todays_info['pair'])
+                pairstr     = "curr {0:>0}".format(todays_info['curr'])
                 amountstr   = "amnt {0:>0,.2f} €".format(todays_info['amount'])
 
                 draw.text((110, y_offset),    buy_timestr, inkyphat.WHITE, font=font)

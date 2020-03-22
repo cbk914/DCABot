@@ -34,15 +34,15 @@ class BotStats:
                , 'latest'       : latest
                , 'do_buy'       : config['do_buy']
                , 'buy_time'     : config['buy_time']
-               , 'pair'         : config['pair']
+               , 'curr'         : config['curr']
                , 'amount'       : config['amount']
                , 'balance'      : balance
                , 'left'         : days
                }
 
-    def get_bought_and_spent(self):
-        bought = { c : 0 for c in ['XBT', 'ETH', 'XTZ'] }
-        spent  = { c : 0 for c in ['XBT', 'ETH', 'XTZ'] }
+    def get_bought_and_spent(self, cryptos):
+        bought = { c : 0 for c in cryptos }
+        spent  = { c : 0 for c in cryptos }
 
         with Orders() as orders:
             allOrders = orders.getOrders()
@@ -57,11 +57,9 @@ class BotStats:
                 bought[curr] += vol
                 spent[curr]  += cost
 
-        price = { 'XBT' : self.__api.getSecondBestAskPrice("XXBTZEUR")
-                , 'ETH' : self.__api.getSecondBestAskPrice("XETHZEUR")
-                , 'XTZ' : self.__api.getSecondBestAskPrice("XTZEUR")
-                }
-        worth  = { c : bought[c] * price[c] for c in ['XBT', 'ETH', 'XTZ'] }
+        pairs  = { c : self.__api.getTradePair(c, "EUR") for c in cryptos }
+        price  = { c : self.__api.getSecondBestAskPrice(pairs[c]) for c in cryptos }
+        worth  = { c : bought[c] * price[c] for c in cryptos }
 
         spent_sum = sum(spent.values())
         worth_sum = sum(worth.values())
