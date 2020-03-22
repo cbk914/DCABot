@@ -57,6 +57,10 @@ def getLastBuyDatetime():
 
 def main():
 
+    # define FIAT currency
+    # TODO: take as command-line arg
+    fiat = "EUR"
+
     # set logging format
     logging.basicConfig( filename = "log/dca.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
@@ -75,7 +79,7 @@ def main():
         try:
             weekday = datetime.today().weekday()
             config = loadConfig(weekday)
-            pair = api.getTradePair(config['curr'], "EUR")
+            pair = api.getTradePair(config['curr'], fiat)
 
             lastBuyDate = lastBuyDatetime.date()
 

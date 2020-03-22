@@ -67,12 +67,11 @@ When the bot buys some amount of crypto, the order details are saved in a local 
 ## Note
 I see myself as a functional programmer. This was a quick project of mine, and I usually don't code Python. As such, some (or much) of the code may be unelegant.
 
-Also, the bot was written with Euro as the currency to buy with. If you want to use another currency, you'd have to change the following:
-* The `"EUR"` parameter in the `api.getTradePair()` call in `src/dcabot.py`
-* The balance query in `src/BotStats.py`
-* The euro symbols in `src/dcapoll.py`
+Also, the bot and monitor programs were written with Euro as the currency to buy with. If you want to use another currency, you'd have to change the the `fiat` variable in `src/dcabot.py` and `src/dcapoll.py`.
 
 If you want the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change `src/dcapoll.py` accordingly.
+
+For the stats to be accurate, use only one FIAT currency with this bot.
 
 Finally, though I have the yellow/black/white Inky pHAT display, I have set it to be black/white only for faster update times. If you want some color on the display, you must update the code and graphics accordingly yourself.
 

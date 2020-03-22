@@ -9,6 +9,19 @@ from BotStats import BotStats
 
 def main():
 
+    # define FIAT currency
+    # TODO: take as command-line arg
+    fiat = "EUR"
+
+    # define supported FIAT symbols
+    fiat_symbols = { "EUR" : '€'
+                   , "USD" : '$'
+                   , "CAD" : '$'
+                   # TODO: more?
+                   }
+
+    fiat_symbol = (' ' + fiat_symbols[fiat]) if fiat in fiat_symbols else ''
+
     # set logging format
     logging.basicConfig( filename = "log/poll.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
@@ -38,7 +51,7 @@ def main():
             ####################
 
             # get stats objects
-            stats = BotStats("EUR")
+            stats = BotStats(fiat)
 
             # get today's info
             today = datetime.today().weekday()
@@ -71,9 +84,9 @@ def main():
                 y_offset += 8
 
             y_offset = 54
-            draw.text((7, y_offset),    "spent {0:>8,.2f} €".format(bought_and_spent['spent_sum']),   inkyphat.BLACK, font=font)
-            draw.text((7, y_offset+8),  "worth {0:>8,.2f} €".format(bought_and_spent['worth_sum']),   inkyphat.BLACK, font=font)
-            draw.text((7, y_offset+16), "chnge {0:>8,.2f} €".format(bought_and_spent['euro_change']), inkyphat.BLACK, font=font)
+            draw.text((7, y_offset),    "spent {0:>8,.2f}{1}".format(bought_and_spent['spent_sum'],   fiat_symbol), inkyphat.BLACK, font=font)
+            draw.text((7, y_offset+8),  "worth {0:>8,.2f}{1}".format(bought_and_spent['worth_sum'],   fiat_symbol), inkyphat.BLACK, font=font)
+            draw.text((7, y_offset+16), "chnge {0:>8,.2f}{1}".format(bought_and_spent['euro_change'], fiat_symbol), inkyphat.BLACK, font=font)
 
             ## DRAW percent centered
             percentstr = "{0:.2f}%".format(bought_and_spent['perc_change'])
@@ -92,7 +105,7 @@ def main():
             if todays_info['do_buy']:
                 buy_timestr = "time {}".format(todays_info['buy_time'].strftime("%H:%M"))
                 pairstr     = "curr {0:>0}".format(todays_info['curr'])
-                amountstr   = "amnt {0:>0,.2f} €".format(todays_info['amount'])
+                amountstr   = "amnt {0:>0,.2f}{1}".format(todays_info['amount'], fiat_symbol)
 
                 draw.text((110, y_offset),    buy_timestr, inkyphat.WHITE, font=font)
                 draw.text((110, y_offset+8),  pairstr,     inkyphat.WHITE, font=font)
@@ -102,8 +115,8 @@ def main():
 
             ## DRAW balance and days left
             y_offset = 54
-            draw.text((110, y_offset),   "blce {0:>0,.2f} €".format(todays_info['balance']), inkyphat.WHITE, font=font)
-            draw.text((110, y_offset+8), "days {0:>0}".format(todays_info['left']),          inkyphat.WHITE, font=font)
+            draw.text((110, y_offset),   "blce {0:>0,.2f}{1}".format(todays_info['balance'], fiat_symbol), inkyphat.WHITE, font=font)
+            draw.text((110, y_offset+8), "days {0:>0}".format(todays_info['left']), inkyphat.WHITE, font=font)
 
             ## DRAW (SSH) IP
             draw.text((110, 89), ipstr, inkyphat.WHITE, font=font)
