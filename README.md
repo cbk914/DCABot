@@ -9,7 +9,7 @@ From [Binance Academy](https://www.binance.vision/glossary/dollar-cost-averaging
 Simply put, the bot blindly buys some amount of crypto every day. The following things can be configured:
 * **What time of day to buy**
 * **What crypto to buy**
-* **How many euros to spend**
+* **How much to spend**
 
 Further, each day of the week can be configured independently such that it will buy e.g. Bitcoin for 20€ on some weekdays, and Tezos for 10€ on the other weekdays. Finally, it can be configured to not buy anything at all on specific weekdays.
 
@@ -24,14 +24,14 @@ I wrote this bot for my Raspberry Pi, but it should be able to run on any machin
 
 If you choose to run the bot on this setup, you can run a separate monitor program `dcapoll.py` to show some stats on the Inky pHAT display as seen in the picture---with 10 minute intervals. The left half of the display will show the following:
 * Timestamp of last display update
-* How much XBT, ETH, and XTZ the bot has bought
-* How much I have spent in total
-* How much it's worth in total
-* The change in euro
+* How much crypto the bot has bought
+* How much it has spent in total
+* How much the crypto is worth in total
+* The change in FIAT
 * The change in percent
 
 The right half, on the other hand, will show the following:
-* Today's configuration (time, pair, amount)
+* Today's configuration (time, crypto, amount)
 * Current balance on Kraken
 * How many days are left based on the weekly configuration
 * The local (SSH) IP address
@@ -50,7 +50,7 @@ Make the log directory by running `mkdir src/log`.
 Public API key
 Private API key
 ```
-The API key should allow the following:
+The API keys should allow the following:
 * Fetching public information (prices, etc.)
 * Fetching private information (balance, order information)
 * Placing orders
@@ -58,11 +58,11 @@ The API key should allow the following:
 ## Usage
 The actual DCA bot can be found in `src/dcabot.py`. Run it by issuing the command `python3 src/dcabot.py`. It will write debug info to `src/log/dca.log`.
 
-The monitor program that will fetch the DCA bot stats and display them on the screen is, as mentioned, `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write debug info to `src/log/poll.log`.
+The monitor program that will fetch the DCA bot stats and display them on the screen can, as mentioned, be found in `src/dcapoll.py`. Run it by issuing the command ```python3 src/dcapoll.py```. It will write debug info to `src/log/poll.log`.
 
 If you want to run these on the Pi through SSH, you may want to use the ```nohup``` command. Entering `make run` in the `src/` directory will run them using `nohup` and save their PIDs to individual dotfiles. Conversely, `make kill` will kill the processes using these dotfiles.
 
-When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database, `src/database/orders.db`. This way, any order you place manually (or with another bot) will not interfere with this bot.
+When the bot buys some amount of crypto, the order details are saved in a local SQLite3 database, `src/database/orders.db`. This way, any order you place manually (or with another bot) will not interfere with this bot. Further, the `BotStats` class uses this database to compute the stats we may want to show.
 
 ## Note
 I see myself as a functional programmer. This was a quick project of mine, and I usually don't code Python. As such, some (or much) of the code may be unelegant.
@@ -70,7 +70,7 @@ I see myself as a functional programmer. This was a quick project of mine, and I
 Also, the bot was written with Euro as the currency to buy with. If you want to use another currency, you'd have to change the following:
 * The `"EUR"` parameter in the `api.getTradePair()` call in `src/dcabot.py`
 * The call to the `BotStats` constructor in `src/dcapoll.py`
-* The euro symbols in `src/dcapoll.py`
+* The Euro symbols in `src/dcapoll.py` (see section TO DO)
 
 If you want the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change `src/dcapoll.py` accordingly.
 
@@ -83,6 +83,7 @@ Finally, though I have the yellow/black/white Inky pHAT display, I have set it t
 * Perhaps handle exceptions in a more elegant manner
 * Split bot and monitor up in different folders
 * Make the cryptos shown on the display configurable
+* Make the FIAT symbols shown on the display configurable
 * A Shell script to run (and perhaps install) everything
 * Give the color (red, yellow, or black) for the display as a command-line flag
 
