@@ -69,7 +69,7 @@ I see myself as a functional programmer. This was a quick project of mine, and I
 
 Also, the bot was written with Euro as the currency to buy with. If you want to use another currency, you'd have to change the following:
 * The `"EUR"` parameter in the `api.getTradePair()` call in `src/dcabot.py`
-* The balance query in `src/BotStats.py`
+* The call to the `BotStats` constructor in `src/dcapoll.py`
 * The euro symbols in `src/dcapoll.py`
 
 If you want the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change `src/dcapoll.py` accordingly.
