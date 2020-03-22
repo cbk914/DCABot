@@ -38,7 +38,7 @@ def main():
             ####################
 
             # get stats objects
-            stats = BotStats()
+            stats = BotStats("EUR")
 
             # get today's info
             today = datetime.today().weekday()

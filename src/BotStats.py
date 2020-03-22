@@ -4,8 +4,9 @@ from Utils import loadConfig
 from datetime import datetime, timedelta
 
 class BotStats:
-    def __init__(self):
+    def __init__(self, fiat):
         self.__api = KrakenAPI()
+        self.__fiat = fiat
 
     def get_weekday_info(self, weekday):
         configs = [loadConfig(i) for i in range(7)]
@@ -18,7 +19,7 @@ class BotStats:
         if latest_order:
             latest = latest_order[1]
 
-        balance = self.__api.getBalance("ZEUR")
+        balance = self.__api.getBalance("Z" + self.__fiat)
         to_spend = balance
         days = -1
         bought_today = False
@@ -57,7 +58,7 @@ class BotStats:
                 bought[curr] += vol
                 spent[curr]  += cost
 
-        pairs  = { c : self.__api.getTradePair(c, "EUR") for c in cryptos }
+        pairs  = { c : self.__api.getTradePair(c, self.__fiat) for c in cryptos }
         price  = { c : self.__api.getSecondBestAskPrice(pairs[c]) for c in cryptos }
         worth  = { c : bought[c] * price[c] for c in cryptos }
 

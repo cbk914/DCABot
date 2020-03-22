@@ -11,7 +11,7 @@ def close_order(api, closed_orders, txid):
     with Orders() as orders:
         curr = closed_orders[txid]['descr']['pair'][:3] # which crypto?
         vol = closed_orders[txid]['vol_exec']           # volume bought
-        cost = closed_orders[txid]['cost']              # cost in EUR
+        cost = closed_orders[txid]['cost']              # cost
         orders.insertOrder(txid, curr, vol, cost)       # update database
 
         price = float(closed_orders[txid]['price'])     # average price
