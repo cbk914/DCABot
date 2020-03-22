@@ -24,7 +24,7 @@ pollkill: .pollpid
 pollrestart: pollkill .pollpid
 
 clean:
-	rm -f Log/*
+	rm -f log/*
 
 dcarunning:
 	ps -aux | grep dcabot.py

@@ -20,13 +20,18 @@ def main():
                    # TODO: more?
                    }
 
+    # set symbol to use on display
     fiat_symbol = (' ' + fiat_symbols[fiat]) if fiat in fiat_symbols else ''
+
+    # define cryptos to count and to show on display
+    cryptos_to_count = ["XBT", "XTZ", "ETH"]
+    cryptos_to_show  = cryptos_to_count
 
     # set logging format
     logging.basicConfig( filename = "log/poll.log"
                        , format='%(asctime)s %(levelname)s: %(message)s'
                        , datefmt='%d/%m/%Y %H:%M:%S'
-                       , level = logging.DEBUG
+                       , level = logging.INFO
                        )
 
     # choose font
@@ -58,7 +63,7 @@ def main():
             todays_info = stats.get_weekday_info(today)
 
             # get bought and spent for given cryptos
-            bought_and_spent = stats.get_bought_and_spent(["XBT", "XTZ", "ETH"])
+            bought_and_spent = stats.get_bought_and_spent(cryptos_to_count)
 
             # get timestamp
             datetimestr = datetime.now().strftime("%d-%m-%Y %H:%M")
@@ -79,9 +84,10 @@ def main():
             ## DRAW bought and spent
             y_offset = 22
             for (c, b) in bought_and_spent['bought'].items():
-                infostr = "{0:<4} {1:>11,.4f}".format(c, b)
-                draw.text((7, y_offset), infostr, inkyphat.BLACK, font=font)
-                y_offset += 8
+                if c in cryptos_to_show:
+                    infostr = "{0:<4} {1:>11,.4f}".format(c, b)
+                    draw.text((7, y_offset), infostr, inkyphat.BLACK, font=font)
+                    y_offset += 8
 
             y_offset = 54
             draw.text((7, y_offset),    "spent {0:>8,.2f}{1}".format(bought_and_spent['spent_sum'],   fiat_symbol), inkyphat.BLACK, font=font)
