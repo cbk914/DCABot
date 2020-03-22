@@ -74,7 +74,9 @@ Also, the bot was written with Euro as the currency to buy with. If you want to 
 
 If you want the display to show other cryptos than XBT, ETH, and XTZ, you'd have to change `src/dcapoll.py` accordingly.
 
-Finally, though I have the yellow/black/white Inky pHAT display, I have set it to be black/white only for faster update times. If you want some color on the display, you must edit the background or change the text colors yourself.
+Finally, though I have the yellow/black/white Inky pHAT display, I have set it to be black/white only for faster update times. If you want some color on the display, you must update the code and graphics accordingly yourself.
+
+**Use this bot at your own risk**.
 
 ## TO DO
 * Display timestamp of latest buy (no room on Inky pHAT display)
@@ -90,15 +92,14 @@ For any feedback and/or suggestions, contact me at larsvadgaard \*at\* gmail \*d
 ## Credits
 First off, this small project was inspired by [this project](https://www.reddit.com/r/CryptoCurrency/comments/d737wg/i_set_up_a_raspberry_pi_trading_bot_with_an_eink/) by u/brutang, and the background image was found on [this page](https://www.electromaker.io/project/view/taking-the-raspberry-pi-inky-phat-to-the-next-level), though it has been edited a bit. I also got some code and ideas from [this repo](https://github.com/Dodo33/btfd-bitcoin-bot) (e.g. config loading).
 
-## Disclaimer
-Use this bot at **your own risk**.
-
 ## Donate
 This isn't a grand project but if you feel like it, I would appreciate small donations.
 ```
-Tezos    (XTZ) @ tz1RWPDoMABjLect6dkETjPWgva5SRMtWGVw
-Bitcoin  (XBT) @ 3QFYdxE4wUuv2GWSF3RfXL2t8gjMrFE9bS
-Ethereum (ETH) @ 0x6e9644FaD57F93b58573bAdEe3Cb0596F32C9852
-Litecoin (LTC) @ MUyMZejFyJsVpmZ5omg8yzh6nRQwhdQM5U
-DASH           @ Xe6VHQi5DPdufsGSSWRg5ZmPkiU4oBxebQ
+Tezos    (XTZ)   @ tz1RWPDoMABjLect6dkETjPWgva5SRMtWGVw
+Bitcoin  (BTC)   @ 38TM7xJnN4tV2U2La8bh5Rcu2muASkyQZn
+Ethereum (ETH)   @ 0x6e9644FaD57F93b58573bAdEe3Cb0596F32C9852
+Litecoin (LTC)   @ MUyMZejFyJsVpmZ5omg8yzh6nRQwhdQM5U
+Dogecoin (DOGE)  @ DG82bQUFRTVyfkExwLwoSj8k6zQRoTCC6h
+Stratis  (STRAT) @ SYWpro6QK8gbAfivNAkmiHy6wCuUs6qLjQ
+Dash     (DASH)  @ Xe6VHQi5DPdufsGSSWRg5ZmPkiU4oBxebQ
 ```
