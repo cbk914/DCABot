@@ -7,7 +7,7 @@ From [Binance Academy](https://www.binance.vision/glossary/dollar-cost-averaging
 
 Simply put, the bot blindly buys some amount of crypto every day. The following things can be configured:
 * **What time of day to buy**
-* **What crypto to buy**
+* **What crypto to buy** (according to its [code on Kraken](https://support.kraken.com/hc/en-us/articles/360000678446-Cryptocurrencies-available-on-Kraken))
 * **How much to spend**
 
 Further, each day of the week can be configured independently such that it will buy e.g. Bitcoin for 20€ on some weekdays, and Tezos for 10€ on the other weekdays. Finally, it can be configured to not buy anything at all on specific weekdays.
