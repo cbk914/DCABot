@@ -1,5 +1,5 @@
 # Configurable DCA bot for crypto
-I have wanted to try out dollar cost averaging (DCA) for quite some time now. However, Kraken---which is my exchange of choice---does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
+I have wanted to try out dollar cost averaging (DCA) for quite some time now, as it's an easy way to stack coins without worrying about price fluctuations. However, Kraken---which is my exchange of choice---does not support automated daily orders, so I thought it would be a fun weekend project to actually make a bot that does this for me.
 
 ## What exactly does it do?
 From [Binance Academy](https://www.binance.vision/glossary/dollar-cost-averaging):
@@ -10,7 +10,7 @@ Simply put, the bot blindly buys some amount of crypto every day. The following 
 * **What crypto to buy** (according to its [code on Kraken](https://support.kraken.com/hc/en-us/articles/360000678446-Cryptocurrencies-available-on-Kraken))
 * **How much to spend**
 
-Further, each day of the week can be configured independently such that it will buy e.g. Bitcoin for 20€ on some weekdays, and Tezos for 10€ on the other weekdays. Finally, it can be configured to not buy anything at all on specific weekdays.
+Further, each day of the week can be configured independently such that it will buy e.g. Bitcoin for 20€ on some days of the week, and Doge for 10€ on the others. Finally, it can be configured to not buy anything at all on specific weekdays.
 
 Check `src/config/config.ini` directory for an example configuration.
 
@@ -34,6 +34,8 @@ The right half, on the other hand, will show the following:
 * Current balance on Kraken
 * How many days are left based on the weekly configuration
 * The local (SSH) IP address
+
+Note that the DCA bot is independent, and the e-ink display is therefore not necessary.
 
 The `BotStats` class in `src/BotStats.py` makes it simple to write other monitor programs such as for the Inky wHAT or the terminal.
 
