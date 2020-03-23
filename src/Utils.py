@@ -27,12 +27,12 @@ def loadConfig(weekday):
 
     if today in parser:
         do_buy = parser[today].getboolean("do_buy")
-        if do_buy: config["do_buy"] = do_buy
+        if do_buy is not None: config["do_buy"] = do_buy
         curr = parser[today].get("curr")
-        if curr: config["curr"] = curr
+        if curr is not None: config["curr"] = curr
         amount = parser[today].getfloat('amount')
-        if amount: config["amount"] = amount
+        if amount is not None: config["amount"] = amount
         buy_time = parser[today].getint('buy_time')
-        if buy_time: config["buy_time"] = buy_time
+        if buy_time is not None: config["buy_time"] = buy_time
 
     return config

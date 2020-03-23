@@ -77,25 +77,34 @@ def main():
     while True:
 
         try:
+            # get today's config
             weekday = datetime.today().weekday()
             config = loadConfig(weekday)
-            pair = api.getTradePair(config['curr'], fiat)
 
+            # date of last order
             lastBuyDate = lastBuyDatetime.date()
 
+            # current date and time
             currentDatetime = datetime.now()
             currentDate = currentDatetime.date()
 
+            # did we already buy today?
             bought_today = lastBuyDate == currentDate
 
+            # buy if criteria are met
             if config['do_buy'] and not bought_today:
-
+                # get current time
                 currentTime = currentDatetime.time()
 
+                # if it's larger than or equal to buy_time, buy!
                 if currentTime >= config['buy_time']:
+                    # get asset pair
+                    pair = api.getTradePair(config['curr'], fiat)
+
                     # buy, and set last buy time if successful
                     if buy(api, pair, config['amount']):
                         lastBuyDatetime = datetime.now()
+
                 else: logging.info("No action this time around.")
 
             else: logging.info("No action this time around.")
@@ -103,6 +112,7 @@ def main():
         except Exception as exc:
             logging.critical("Exception " + str(exc.__class__.__name__) + " : " + str(exc))
 
+        # sleep until next 10 min mark
         end = datetime.now()
         sleep_time = (timedelta(minutes=10) - timedelta(minutes=end.minute % 10, seconds=end.second)).total_seconds()
         if sleep_time > 0:
@@ -110,4 +120,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
