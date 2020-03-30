@@ -10,33 +10,36 @@ class BotStats:
 
     def get_weekday_info(self, weekday):
         configs = [loadConfig(i) for i in range(7)]
-        config = configs[weekday]
+        weekday_config = configs[weekday]
 
         with Orders() as orders:
             latest_order = orders.getLatestOrder()
 
-        latest = None
-        if latest_order:
-            latest = latest_order[1]
-
-        balance = self.__api.getBalance("Z" + self.__fiat)
-        to_spend = balance
-        days = -1
         bought_today = False
+        latest = latest_order[1] if latest_order else None
         if latest and (latest + timedelta(hours=1)).date() == datetime.now().date():
             weekday = (weekday + 1) % 7
             bought_today = True
+        days = -1
+        to_spend = -1
+        balance = self.__api.getBalance("Z" + self.__fiat)
+        # make sure user spends money
+        for config in configs:
+            if config['do_buy'] and config['amount'] > 0:
+                to_spend = balance
+                break
+        # if he does, calculate days remaining
         while to_spend >= 0:
-            to_spend -= configs[weekday]['amount']
+            to_spend -= configs[weekday]['amount'] if configs[weekday]['do_buy'] else 0
             days += 1
             weekday = (weekday + 1) % 7
 
         return { 'bought_today' : bought_today
                , 'latest'       : latest
-               , 'do_buy'       : config['do_buy']
-               , 'buy_time'     : config['buy_time']
-               , 'curr'         : config['curr']
-               , 'amount'       : config['amount']
+               , 'do_buy'       : weekday_config['do_buy']
+               , 'buy_time'     : weekday_config['buy_time']
+               , 'curr'         : weekday_config['curr']
+               , 'amount'       : weekday_config['amount']
                , 'balance'      : balance
                , 'left'         : days
                }
