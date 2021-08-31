@@ -1,3 +1,3 @@
 krakenex==2.1.0
 inky==0.0.5
-Pillow==7.0.0
+Pillow==8.1.0
